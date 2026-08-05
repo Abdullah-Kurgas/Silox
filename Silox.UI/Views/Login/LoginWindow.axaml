@@ -1,0 +1,84 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:Silox.UI.ViewModels"
+        x:Class="Silox.UI.Views.Login.LoginWindow"
+        x:DataType="vm:LoginViewModel"
+        CanResize="False"
+        CanMinimize="False"
+        CanMaximize="False"
+        Width="480"
+        Height="580"
+        WindowDecorations="BorderOnly"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid RowDefinitions="Auto, *, Auto">
+        <StackPanel Grid.Row="0" Margin="15">
+            <TextBlock Text="Silox - Prijava korisnika" FontSize="16" />
+        </StackPanel>
+            
+        <Grid Grid.Row="1" Margin="15" ColumnSpacing="15" RowSpacing="15"
+              RowDefinitions="*, Auto" ColumnDefinitions="Auto, *">
+            <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Viewbox Width="84" Height="84" HorizontalAlignment="Center" Margin="15">
+                    <Canvas Width="24" Height="24">
+                        <Path Data="M7,14A2,2 0 0,1 5,12A2,2 0 0,1 7,10A2,2 0 0,1 9,12A2,2 0 0,1 7,14M12.65,10C11.83,7.67 9.61,6 7,6A6,6 0 0,0 1,12A6,6 0 0,0 7,18C9.61,18 11.83,16.33 12.65,14H17V18H21V14H23V10H12.65Z"
+                              Fill="#228B22" />
+                        <Path Data="M10.65,8C9.83,5.67 7.61,4 5,4A6,6 0 0,0 -1,10A6,6 0 0,0 5,16C7.61,16 9.83,14.33 10.65,12H15V16H19V12H21V8H10.65Z"
+                              Fill="#DAA520"
+                              Canvas.Left="2"
+                              Canvas.Top="-2"/>
+                    </Canvas>
+                </Viewbox>
+
+                <TextBlock Text="v1.15.9.0"
+                           Foreground="#800080"
+                           FontSize="14"
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
+            <ListBox Grid.Row="0" Grid.Column="1" Name="UserListBox"
+                     ItemsSource="{Binding Users}"
+                     SelectedItem="{Binding SelectedUser}"
+                     BorderThickness="1" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                Text="Lozinka :"
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Right"
+                FontWeight="Bold"
+                FontSize="13"
+                Margin="0,0,10,0"/>
+            <TextBox Grid.Row="1" Grid.Column="1" 
+                PasswordChar="*"
+                Height="24"
+                Padding="5,0"
+                VerticalContentAlignment="Center" />
+        </Grid>
+        
+        <StackPanel Grid.Row="2" Margin="15"
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right" 
+                    Spacing="8">
+            <Button Command="{Binding OkCommand}" 
+                    IsDefault="True"
+                    MinWidth="100"
+                    MinHeight="40">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+                    <PathIcon Data="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" 
+                              Foreground="Green" Width="12" Height="12"/>
+                    <TextBlock Text="OK" FontWeight="Bold"/>
+                </StackPanel>
+            </Button>
+            <Button Click="CloseLogin" 
+                    IsCancel="True"
+                    MinWidth="100"
+                    MinHeight="40">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15">
+                    <PathIcon Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" 
+                              Foreground="Red" Width="12" Height="12"/>
+                    <TextBlock Text="Poništi"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        </Grid>
+    
+</Window>

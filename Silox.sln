@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silox.Data", "Silox.Data\Silox.Data.csproj", "{0BD96DE2-D901-4915-A845-876C3DA6D984}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silox.UI", "Silox.UI\Silox.UI.csproj", "{0E75C1C9-0777-46E8-B4E6-83B555F55F76}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0BD96DE2-D901-4915-A845-876C3DA6D984}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BD96DE2-D901-4915-A845-876C3DA6D984}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BD96DE2-D901-4915-A845-876C3DA6D984}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BD96DE2-D901-4915-A845-876C3DA6D984}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E75C1C9-0777-46E8-B4E6-83B555F55F76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E75C1C9-0777-46E8-B4E6-83B555F55F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E75C1C9-0777-46E8-B4E6-83B555F55F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E75C1C9-0777-46E8-B4E6-83B555F55F76}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
