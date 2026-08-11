@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silox.Data", "Silox.Data\Si
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silox.UI", "Silox.UI\Silox.UI.csproj", "{0E75C1C9-0777-46E8-B4E6-83B555F55F76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silox.Service", "Silox.Service\Silox.Service.csproj", "{B4D16603-5D18-4C5F-95E8-86FB9E92A416}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{0E75C1C9-0777-46E8-B4E6-83B555F55F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E75C1C9-0777-46E8-B4E6-83B555F55F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E75C1C9-0777-46E8-B4E6-83B555F55F76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4D16603-5D18-4C5F-95E8-86FB9E92A416}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4D16603-5D18-4C5F-95E8-86FB9E92A416}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4D16603-5D18-4C5F-95E8-86FB9E92A416}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4D16603-5D18-4C5F-95E8-86FB9E92A416}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
