@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.IO;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -18,7 +17,7 @@ namespace Silox.UI;
 
 public partial class App : Application
 {
-    public static IHost Host { get; private set; }
+    private static IHost Host { get; set; }
     
     public override void Initialize()
     {
