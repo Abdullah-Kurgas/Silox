@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Silox.Data.Models;
 
 namespace Silox.Service.DBContexts
 {
@@ -7,5 +8,7 @@ namespace Silox.Service.DBContexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
         }
+
+        public DbSet<EArhiva> earhiva { get; set; }
     }
 }

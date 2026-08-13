@@ -11,14 +11,17 @@ using Npgsql;
 using Silox.Data.Interfaces;
 using Silox.Service;
 using Silox.Service.DBContexts;
+using Silox.Service.Services.EArhivaServices;
+using Silox.UI.ViewModels;
 using Silox.UI.Views;
+using Silox.UI.Views.Earhiva;
 
 namespace Silox.UI;
 
 public partial class App : Application
 {
-    private static IHost Host { get; set; }
-    
+    private static IHost? Host { get; set; }
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -29,35 +32,45 @@ public partial class App : Application
         Host = Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder()
             .ConfigureAppConfiguration((context, config) =>
             {
-                config.SetBasePath(Directory.GetCurrentDirectory());
+                config.SetBasePath(AppContext.BaseDirectory);
                 config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
             })
-            .ConfigureServices((context, services) =>
-            {
-                services.AddSingleton<IConnectionStringResolver, ConnectionStringResolver>();
-                services.AddDbContext<EArhivaDbContext>((sp, options) =>
-                {
-                    var resolver = sp.GetRequiredService<IConnectionStringResolver>();
-                    var connectionString = resolver.GetConnectionString("earhiva");
-
-                    options.UseNpgsql(connectionString);
-                });
-            })
+            .ConfigureServices((h, s) => ConfigureServices(s))
             .Build();
-        
+
         Host.Start();
-        
+
+        CheckDbConnection();
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new MainWindow
+            desktop.MainWindow = Host.Services.GetRequiredService<EArhiva>();
+            desktop.ShutdownRequested += async (s, e) =>
             {
-                DataContext = new MainWindow(),
+                await Host.StopAsync();
+                Host.Dispose();
             };
         }
 
         base.OnFrameworkInitializationCompleted();
     }
-    
+
+    private static void ConfigureServices(IServiceCollection services)
+    {
+        services.AddSingleton<IConnectionStringResolver, ConnectionStringResolver>();
+        services.AddDbContext<EArhivaDbContext>((sp, options) =>
+        {
+            var resolver = sp.GetRequiredService<IConnectionStringResolver>();
+            var connectionString = resolver.GetConnectionString("earhiva");
+
+            options.UseNpgsql(connectionString);
+        });
+
+        services.AddScoped<IEArhivaService, EArhivaService>();
+        services.AddTransient<EArhivaViewModel>();
+        services.AddTransient<EArhiva>();
+    }
+
     private async void CheckDbConnection()
     {
         try
@@ -72,12 +85,10 @@ public partial class App : Application
         }
         catch (NpgsqlException ex)
         {
-            // Specific PostgreSQL Server Error (e.g., Wrong Password, DB doesn't exist)
             Console.WriteLine($"❌ PostgreSQL Error Code {ex.SqlState}: {ex.Message}");
         }
         catch (Exception ex)
         {
-            // Network or File Error (e.g., Port blocked, Appsettings missing)
             Console.WriteLine($"❌ General Error: {ex.Message}");
         }
     }

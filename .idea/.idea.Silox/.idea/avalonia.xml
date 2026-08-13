@@ -4,6 +4,8 @@
     <option name="projectPerEditor">
       <map>
         <entry key="Silox.UI/App.axaml" value="Silox.UI/Silox.UI.csproj" />
+        <entry key="Silox.UI/Views/Dashboard/Dashboard.axaml" value="Silox.UI/Silox.UI.csproj" />
+        <entry key="Silox.UI/Views/Earhiva/EArhiva.axaml" value="Silox.UI/Silox.UI.csproj" />
         <entry key="Silox.UI/Views/Login/LoginWindow.axaml" value="Silox.UI/Silox.UI.csproj" />
         <entry key="Silox.UI/Views/MainWindow.axaml" value="Silox.UI/Silox.UI.csproj" />
       </map>

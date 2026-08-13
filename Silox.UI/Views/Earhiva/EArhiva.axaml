@@ -1,0 +1,75 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Silox.UI.ViewModels"
+        xmlns:ic="using:FluentIcons.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Silox.UI.Views.Earhiva.EArhiva"
+        Title="EArhiva"
+        x:DataType="vm:EArhivaViewModel">
+    <Grid ColumnDefinitions="Auto, Auto">
+        <Grid RowDefinitions="*, Auto" Grid.Column="0">
+            <DataGrid
+                Grid.Row="0"
+                ItemsSource="{Binding Data}"
+                AutoGenerateColumns="False"
+                VerticalScrollBarVisibility="Auto"
+                HorizontalScrollBarVisibility="Auto"
+                GridLinesVisibility="Horizontal"
+                Padding="0"
+                FontSize="9"
+                CanUserSortColumns="False">
+
+                <DataGrid.Styles>
+                    <Style Selector="DataGridColumnHeader">
+                        <Setter Property="Background"
+                                Value="{DynamicResource CalendarViewBackground}" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                    </Style>
+
+                    <Style Selector="DataGridCell">
+                        <Setter Property="FontSize" Value="13" />
+                    </Style>
+                    <Style Selector="DataGridCell:focus /template/ Rectangle">
+                        <Setter Property="IsVisible" Value="False" />
+                    </Style>
+                </DataGrid.Styles>
+
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn
+                        Binding="{Binding IsSelected, Mode=TwoWay}"
+                        IsReadOnly="False" />
+                    <DataGridTextColumn Header="Sifra PP" Binding="{Binding SifraPp}" Width="70" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Naziv PP" Binding="{Binding NazivPp}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Datum Dok."
+                                        Binding="{Binding DatumDokumenta, StringFormat={}{0:dd.MM.yyyy}}" Width="110"
+                                        IsReadOnly="True" />
+                    <DataGridTextColumn Header="Vrsta" Binding="{Binding VrstaDokumenta}" Width="110" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Broj Dok." Binding="{Binding BrojDokumenta}" Width="110"
+                                        IsReadOnly="True" />
+                    <DataGridTextColumn Header="Iznos" Binding="{Binding Iznos}"
+                                        Width="100" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Radnik" Binding="{Binding ImeVozaca}" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding Verzija, StringFormat='({0})'}" IsReadOnly="True" Width="40" />
+                    <DataGridTextColumn Header="Vrijeme sken." Binding="{Binding Vrijeme}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Isp." Binding="{Binding Isporuka}" IsReadOnly="True" Width="60" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" Spacing="10">
+                <Button Command="{Binding PreviousPageCommand}">
+                    <ic:FluentIcon Icon="ChevronLeft" />
+                </Button>
+                <TextBlock Text="{Binding CurrentPage, StringFormat='Stranica {0}'}" VerticalAlignment="Center" />
+                <Button Command="{Binding NextPageCommand}">
+                    <ic:FluentIcon Icon="ChevronRight" />
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Column="1">
+
+        </StackPanel>
+    </Grid>
+</Window>

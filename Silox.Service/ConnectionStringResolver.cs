@@ -7,7 +7,7 @@ namespace Silox.Service
     {
         public string GetConnectionString(string dbName)
         {
-            return configuration.GetConnectionString(dbName) 
+            return configuration.GetConnectionString(dbName)
                    ?? throw new InvalidOperationException($"Connection string '{dbName}' was not found.");
         }
     }
