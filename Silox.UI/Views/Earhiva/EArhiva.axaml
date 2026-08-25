@@ -1,75 +1,178 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="clr-namespace:Silox.UI.ViewModels"
-        xmlns:ic="using:FluentIcons.Avalonia"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="Silox.UI.Views.Earhiva.EArhiva"
-        Title="EArhiva"
-        x:DataType="vm:EArhivaViewModel">
-    <Grid ColumnDefinitions="Auto, Auto">
-        <Grid RowDefinitions="*, Auto" Grid.Column="0">
-            <DataGrid
-                Grid.Row="0"
-                ItemsSource="{Binding Data}"
-                AutoGenerateColumns="False"
-                VerticalScrollBarVisibility="Auto"
-                HorizontalScrollBarVisibility="Auto"
-                GridLinesVisibility="Horizontal"
-                Padding="0"
-                FontSize="9"
-                CanUserSortColumns="False">
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ic="using:FluentIcons.Avalonia"
+    xmlns:vm="clr-namespace:Silox.UI.ViewModels"
+    x:Class="Silox.UI.Views.Earhiva.EArhiva"
+    x:DataType="vm:EArhivaViewModel">
+    <Grid
+        Margin="10"
+        ColumnDefinitions="*,.9*">
+        <Border Grid.Column="0">
 
-                <DataGrid.Styles>
-                    <Style Selector="DataGridColumnHeader">
-                        <Setter Property="Background"
-                                Value="{DynamicResource CalendarViewBackground}" />
-                        <Setter Property="FontWeight" Value="Bold" />
-                    </Style>
+            <Grid ColumnDefinitions="Auto, *" ColumnSpacing="10">
+                <StackPanel Grid.Column="0" Spacing="5" Margin="0 70 0 0">
+                    <Button ToolTip.Tip="Refresh">
+                        <ic:FluentIcon Icon="ArrowSync" />
+                    </Button>
+                    <Button ToolTip.Tip="Izmjena detalja">
+                        <ic:FluentIcon Icon="DocumentEdit" />
+                    </Button>
+                    <Button ToolTip.Tip="Export u excel">
+                        <ic:FluentIcon Icon="DocumentCsv" />
+                    </Button>
+                    <Button ToolTip.Tip="Štampa spiska">
+                        <ic:FluentIcon Icon="DocumentPrint" />
+                    </Button>
+                    <Button ToolTip.Tip="Štampa odabranih dokumenata">
+                        <ic:FluentIcon Icon="Print" />
+                    </Button>
+                    <Button ToolTip.Tip="Slanje odabranih dokumenata emailom">
+                        <ic:FluentIcon Icon="Mail" />
+                    </Button>
+                    <Button ToolTip.Tip="Download odabranih dokumenata">
+                        <ic:FluentIcon Icon="ArrowDownload" />
+                    </Button>
+                </StackPanel>
 
-                    <Style Selector="DataGridCell">
-                        <Setter Property="FontSize" Value="13" />
-                    </Style>
-                    <Style Selector="DataGridCell:focus /template/ Rectangle">
-                        <Setter Property="IsVisible" Value="False" />
-                    </Style>
-                </DataGrid.Styles>
+                <Grid Grid.Column="1" RowDefinitions="Auto,*" RowSpacing="10">
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="10">
+                        <Button MinWidth="140">
+                            <StackPanel Orientation="Horizontal"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Spacing="8">
+                                <TextBlock FontSize="14">Odaberi (0)</TextBlock>
+                                <ic:FluentIcon Icon="ChevronDown" />
+                            </StackPanel>
 
-                <DataGrid.Columns>
-                    <DataGridCheckBoxColumn
-                        Binding="{Binding IsSelected, Mode=TwoWay}"
-                        IsReadOnly="False" />
-                    <DataGridTextColumn Header="Sifra PP" Binding="{Binding SifraPp}" Width="70" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Naziv PP" Binding="{Binding NazivPp}" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Datum Dok."
-                                        Binding="{Binding DatumDokumenta, StringFormat={}{0:dd.MM.yyyy}}" Width="110"
-                                        IsReadOnly="True" />
-                    <DataGridTextColumn Header="Vrsta" Binding="{Binding VrstaDokumenta}" Width="110" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Broj Dok." Binding="{Binding BrojDokumenta}" Width="110"
-                                        IsReadOnly="True" />
-                    <DataGridTextColumn Header="Iznos" Binding="{Binding Iznos}"
-                                        Width="100" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Radnik" Binding="{Binding ImeVozaca}" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding Verzija, StringFormat='({0})'}" IsReadOnly="True" Width="40" />
-                    <DataGridTextColumn Header="Vrijeme sken." Binding="{Binding Vrijeme}" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Isp." Binding="{Binding Isporuka}" IsReadOnly="True" Width="60" />
-                </DataGrid.Columns>
-            </DataGrid>
+                            <Button.Flyout>
+                                <MenuFlyout>
+                                    <MenuItem Header="Odaberi sve" />
+                                    <MenuItem Header="Poništi odabir" />
+                                    <MenuItem Header="Obrni odabir" />
+                                </MenuFlyout>
+                            </Button.Flyout>
+                        </Button>
 
-            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" Spacing="10">
-                <Button Command="{Binding PreviousPageCommand}">
-                    <ic:FluentIcon Icon="ChevronLeft" />
-                </Button>
-                <TextBlock Text="{Binding CurrentPage, StringFormat='Stranica {0}'}" VerticalAlignment="Center" />
-                <Button Command="{Binding NextPageCommand}">
-                    <ic:FluentIcon Icon="ChevronRight" />
-                </Button>
-            </StackPanel>
-        </Grid>
+                        <TextBox HorizontalAlignment="Left"
+                                 PlaceholderText="Search archive..."
+                                 Width="300" />
+                    </StackPanel>
 
-        <StackPanel Grid.Column="1">
+                    <Border Grid.Row="1">
+                        <DataGrid
+                            ItemsSource="{Binding Data}"
+                            AutoGenerateColumns="False"
+                            IsReadOnly="True"
+                            SelectionMode="Single"
+                            GridLinesVisibility="Horizontal">
+                            <DataGrid.Styles>
+                                <Style Selector="DataGridColumnHeader">
+                                    <Setter Property="Background"
+                                            Value="{DynamicResource CalendarViewBackground}" />
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                </Style>
 
-        </StackPanel>
+                                <Style Selector="DataGridCell">
+                                    <Setter Property="FontSize" Value="13" />
+                                </Style>
+                                <Style Selector="DataGridCell:focus /template/ Rectangle">
+                                    <Setter Property="IsVisible" Value="False" />
+                                </Style>
+                            </DataGrid.Styles>
+
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                                      HorizontalAlignment="Center" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTextColumn Header="Sifra PP" Binding="{Binding SifraPp}" Width="70"
+                                                    IsReadOnly="True" />
+                                <!-- <DataGridTemplateColumn Header="Naziv PP"> -->
+                                <!--     <DataGridTemplateColumn.CellTemplate> -->
+                                <!--         <DataTemplate> -->
+                                <!--             <TextBlock Text="{Binding NazivPp}" -->
+                                <!--                        TextTrimming="CharacterEllipsis" -->
+                                <!--                        VerticalAlignment="Center" -->
+                                <!--                        ToolTip.Tip="{Binding NazivPp}" /> -->
+                                <!--         </DataTemplate> -->
+                                <!--     </DataGridTemplateColumn.CellTemplate> -->
+                                <!-- </DataGridTemplateColumn> -->
+                                <DataGridTextColumn Header="Naziv PP"
+                                                    Binding="{Binding NazivPp}"
+                                                    IsReadOnly="True" />
+                                <DataGridTextColumn Header="Datum Dok."
+                                                    Binding="{Binding DatumDokumenta, StringFormat={}{0:dd.MM.yyyy}}"
+                                                    Width="110"
+                                                    IsReadOnly="True" />
+                                <DataGridTextColumn Header="Vrsta" Binding="{Binding VrstaDokumenta}" Width="110"
+                                                    IsReadOnly="True" />
+                                <DataGridTextColumn Header="Broj Dok." Binding="{Binding BrojDokumenta}" Width="110"
+                                                    IsReadOnly="True" />
+                                <DataGridTextColumn Header="Iznos" Binding="{Binding Iznos}"
+                                                    Width="100" IsReadOnly="True" />
+                                <DataGridTextColumn Header="Radnik" Binding="{Binding ImeVozaca}" IsReadOnly="True"
+                                                    Width="150" />
+                                <DataGridTextColumn Binding="{Binding Verzija, StringFormat='({0})'}" IsReadOnly="True"
+                                                    Width="40" />
+                                <DataGridTextColumn Header="Vrijeme sken." Binding="{Binding Vrijeme}"
+                                                    IsReadOnly="True" Width="160" />
+                                <DataGridTextColumn Header="Isp." Binding="{Binding Isporuka}" IsReadOnly="True"
+                                                    Width="70" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="1"
+                Margin="12,0,0,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="BlanchedAlmond"
+                BorderThickness="1"
+                CornerRadius="8">
+
+            <Grid RowDefinitions="*,Auto">
+
+                <Border Grid.Row="0"
+                        Margin="12"
+                        CornerRadius="6"
+                        ClipToBounds="True">
+
+                    <Grid>
+                        <Image
+                            Stretch="Uniform"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="30" />
+
+
+                        <!-- EMPTY STATE -->
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+
+                            <TextBlock Text="No file selected"
+                                       Foreground="White"
+                                       FontSize="18"
+                                       HorizontalAlignment="Center" />
+
+                            <TextBlock Text="Select an item from the archive"
+                                       Foreground="#AAAAAA"
+                                       Margin="0,6,0,0"
+                                       HorizontalAlignment="Center" />
+
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+
+        </Border>
     </Grid>
-</Window>
+</UserControl>
