@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -5,53 +6,41 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace Silox.UI.ViewModels;
 
-public record UserModel(string Name);
-
 public partial class LoginViewModel : ObservableObject
 {
-    [ObservableProperty]
-    private ObservableCollection<UserModel> _users = new();
+    public ObservableCollection<string> Users { get; } = new()
+    {
+        new("Administrator")
+    };
 
-    [ObservableProperty]
-    private UserModel? _selectedUser;
+    [ObservableProperty] [NotifyCanExecuteChangedFor(nameof(LoginCommand))]
+    private string? _selectedUser = null;
 
-    [ObservableProperty]
+    [ObservableProperty] [NotifyCanExecuteChangedFor(nameof(LoginCommand))]
     private string _password = string.Empty;
 
-    [ObservableProperty]
-    private bool _rememberMe;
+    [ObservableProperty] private string _versionText = "v1.15.2.0";
 
-    [ObservableProperty]
-    private string _versionText = "v1.15.2.0";
+    public event Action? LoginSucceeded;
 
-    public LoginViewModel()
+    private bool CanLogin()
     {
-        // Load initial users list matching the dialog
-        Users = new ObservableCollection<UserModel>
-        {
-            new("Harun Salihovic"),
-            new("Hasan Hasanovic"),
-            new("Hasija Dubicic"),
-            new("HORECA"),
-            new("Ibrahim Mujanovic"),
-            new("Interne PJ"),
-            new("Irisa Alic"),
-            new("Irma Burdzovic"),
-            new("Ismet Krlic"),
-            new("Izvoz"),
-            new("Jasmin Katica"),
-            new("Jasmina Latifovic")
-        };
+        return !string.IsNullOrWhiteSpace(SelectedUser)
+               && !string.IsNullOrWhiteSpace(Password);
     }
 
-    [RelayCommand]
-    private async Task OkAsync()
+    [RelayCommand(CanExecute = nameof(CanLogin))]
+    private void Login()
     {
         if (SelectedUser is null || string.IsNullOrWhiteSpace(Password))
         {
             return;
         }
 
-        // Perform authentication against AD or DB
+        if (SelectedUser == "Administrator" &&
+            Password == "admin123")
+        {
+            LoginSucceeded?.Invoke();
+        }
     }
 }

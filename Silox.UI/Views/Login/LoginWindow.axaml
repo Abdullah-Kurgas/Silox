@@ -32,9 +32,11 @@
                     </Canvas>
                 </Viewbox>
             </StackPanel>
+
             <ListBox Grid.Row="0" Grid.Column="1" Name="UserListBox"
                      ItemsSource="{Binding Users}"
                      SelectedItem="{Binding SelectedUser}"
+                     SelectionChanged="UserListBox_OnSelectionChanged"
                      BorderThickness="1" />
 
             <TextBlock Grid.Row="1" Grid.Column="0"
@@ -45,6 +47,8 @@
                        FontSize="13"
                        Margin="0,0,10,0" />
             <TextBox Grid.Row="1" Grid.Column="1"
+                     Name="PasswordTextBox"
+                     Text="{Binding Password, Mode=TwoWay}"
                      PasswordChar="*"
                      Height="24"
                      Padding="5,0"
@@ -61,7 +65,7 @@
                         Orientation="Horizontal"
                         HorizontalAlignment="Right"
                         Spacing="8">
-                <Button Command="{Binding OkCommand}"
+                <Button Command="{Binding LoginCommand}"
                         IsDefault="True"
                         MinWidth="100"
                         MinHeight="40">

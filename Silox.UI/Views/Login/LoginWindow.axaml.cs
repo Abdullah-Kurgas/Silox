@@ -1,38 +1,35 @@
+using System;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Silox.UI.ViewModels;
 
 namespace Silox.UI.Views.Login;
 
 public partial class LoginWindow : Window
 {
-    public LoginWindow()
+    public LoginWindow(LoginViewModel viewModel)
     {
         InitializeComponent();
-        
-        UserListBox.ItemsSource = new[] {
-            "Harun Salihovic",
-            "Hasan Hasanovic",
-            "Hasija Dubicic",
-            "HORECA Account",
-            "Ibrahim Mujanovic",
-            "Interne PJ",
-            "Irisa Alic",
-            "Irma Burdzovic",
-            "Ismet Krlic",
-            "Izvoz Sector",
-            "Jasmin Katica",
-            "Jasmina Latifovic",
-            "Kenan Hadzic",
-            "Lejla Begic",
-            "Mirza Mesic",
-            "Nedim Omerovic",
-            "Selma Selimovic",
-            "Tarik Imamovic"
-        };
+        DataContext = viewModel;
+
+        viewModel.LoginSucceeded += OnLoginSucceeded;
+    }
+
+    private void OnLoginSucceeded()
+    {
+        Close(true);
     }
 
     private void CloseLogin(object? sender, RoutedEventArgs e)
     {
-        Close();
+        Close(false);
+    }
+
+    private void UserListBox_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (UserListBox.SelectedItem != null)
+        {
+            PasswordTextBox.Focus();
+        }
     }
 }
