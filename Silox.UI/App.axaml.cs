@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -10,6 +11,7 @@ using Npgsql;
 using Silox.Data.Interfaces;
 using Silox.Service;
 using Silox.Service.DBContexts;
+using Silox.Service.Extensions;
 using Silox.Service.Services.EArhivaServices;
 using Silox.UI.ViewModels;
 using Silox.UI.Views;
@@ -31,6 +33,8 @@ public partial class App : Application
     {
         Host = ConfigureHost();
         Host.Start();
+
+        // CheckDatabases();
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
@@ -64,13 +68,7 @@ public partial class App : Application
     private static void ConfigureServices(IServiceCollection services)
     {
         services.AddSingleton<IConnectionStringResolver, ConnectionStringResolver>();
-        services.AddDbContext<EArhivaDbContext>((sp, options) =>
-        {
-            var resolver = sp.GetRequiredService<IConnectionStringResolver>();
-            var connectionString = resolver.GetConnectionString("earhiva");
-
-            options.UseNpgsql(connectionString);
-        });
+        services.AddDatabaseServices();
 
         services.AddScoped<IEArhivaService, EArhivaService>();
         services.AddTransient<EArhivaViewModel>();
@@ -92,25 +90,20 @@ public partial class App : Application
         mainWindow.Show();
     }
 
-    // private async void CheckDbConnection()
-    // {
-    //     try
-    //     {
-    //         using (var scope = Host.Services.CreateScope())
-    //         {
-    //             var dbContext = scope.ServiceProvider.GetRequiredService<EArhivaDbContext>();
-    //             await dbContext.Database.OpenConnectionAsync();
-    //             Console.WriteLine("✅ Connected successfully!");
-    //             await dbContext.Database.CloseConnectionAsync();
-    //         }
-    //     }
-    //     catch (NpgsqlException ex)
-    //     {
-    //         Console.WriteLine($"❌ PostgreSQL Error Code {ex.SqlState}: {ex.Message}");
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         Console.WriteLine($"❌ General Error: {ex.Message}");
-    //     }
-    // }
+    private async Task CheckDatabases()
+    {
+        using var scope = Host.Services.CreateScope();
+
+        var earhiva = scope.ServiceProvider
+            .GetRequiredService<EArhivaDbContext>();
+
+        var garson = scope.ServiceProvider
+            .GetRequiredService<GarsonDbContext>();
+
+        Console.WriteLine(
+            $"E-Arhiva: {(await earhiva.Database.CanConnectAsync() ? "Connected" : "X")}");
+
+        Console.WriteLine(
+            $"Garson: {(await garson.Database.CanConnectAsync() ? "Connected" : "X")}");
+    }
 }
