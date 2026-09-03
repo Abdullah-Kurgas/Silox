@@ -1,12 +1,10 @@
 using Silox.Data.DTOs;
+using Silox.Data.Models;
 
 namespace Silox.Data.Interfaces;
 
 public interface IEArhivaService
 {
     Task<List<EArhivaDTO>> GetPagedAsync(int pageIndex, int pageSize);
-    // Task<EArhiva?> GetByIdAsync(int id);
-    // Task<EArhiva> CreateAsync(EArhiva entity);
-    // Task<bool> UpdateAsync(EArhiva entity);
-    // Task<bool> DeleteAsync(int id);
+    Task<EArhiva?> GetItemDetailsAsync(int id);
 }

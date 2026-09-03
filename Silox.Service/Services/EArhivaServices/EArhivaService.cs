@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Silox.Data.DTOs;
 using Silox.Data.Interfaces;
+using Silox.Data.Models;
 using Silox.Service.DBContexts;
 
 namespace Silox.Service.Services.EArhivaServices;
@@ -31,5 +32,10 @@ public class EArhivaService(EArhivaDbContext context) : BaseService<EArhivaDbCon
             })
             .Take(100)
             .ToListAsync();
+    }
+
+    public async Task<EArhiva?> GetItemDetailsAsync(int id)
+    {
+        return await _context.earhiva.FindAsync(id);
     }
 }

@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ic="using:FluentIcons.Avalonia"
     xmlns:vm="clr-namespace:Silox.UI.ViewModels"
-    x:Class="Silox.UI.Views.Earhiva.EArhiva"
+    x:Class="Silox.UI.Views.Earhiva.EArhivaView"
     x:DataType="vm:EArhivaViewModel">
     <Grid
         Margin="10"
@@ -56,13 +56,14 @@
                         </Button>
 
                         <TextBox HorizontalAlignment="Left"
-                                 PlaceholderText="Search archive..."
+                                 PlaceholderText="Traži..."
                                  Width="300" />
                     </StackPanel>
 
                     <Border Grid.Row="1">
                         <DataGrid
                             ItemsSource="{Binding Data}"
+                            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                             AutoGenerateColumns="False"
                             IsReadOnly="True"
                             SelectionMode="Single"
@@ -92,28 +93,25 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTextColumn Header="Sifra PP" Binding="{Binding SifraPp}" Width="70"
+                                <DataGridTextColumn Header="Sifra PP" Binding="{Binding SifraPp}" Width="80"
                                                     IsReadOnly="True" />
-                                <!-- <DataGridTemplateColumn Header="Naziv PP"> -->
-                                <!--     <DataGridTemplateColumn.CellTemplate> -->
-                                <!--         <DataTemplate> -->
-                                <!--             <TextBlock Text="{Binding NazivPp}" -->
-                                <!--                        TextTrimming="CharacterEllipsis" -->
-                                <!--                        VerticalAlignment="Center" -->
-                                <!--                        ToolTip.Tip="{Binding NazivPp}" /> -->
-                                <!--         </DataTemplate> -->
-                                <!--     </DataGridTemplateColumn.CellTemplate> -->
-                                <!-- </DataGridTemplateColumn> -->
-                                <DataGridTextColumn Header="Naziv PP"
-                                                    Binding="{Binding NazivPp}"
-                                                    IsReadOnly="True" />
+                                <DataGridTemplateColumn Header="Naziv PP" Width="250">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding NazivPp}"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       VerticalAlignment="Center"
+                                                       ToolTip.Tip="{Binding NazivPp}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                                 <DataGridTextColumn Header="Datum Dok."
                                                     Binding="{Binding DatumDokumenta, StringFormat={}{0:dd.MM.yyyy}}"
                                                     Width="110"
                                                     IsReadOnly="True" />
-                                <DataGridTextColumn Header="Vrsta" Binding="{Binding VrstaDokumenta}" Width="110"
+                                <DataGridTextColumn Header="Vrsta" Binding="{Binding VrstaDokumenta}" Width="120"
                                                     IsReadOnly="True" />
-                                <DataGridTextColumn Header="Broj Dok." Binding="{Binding BrojDokumenta}" Width="110"
+                                <DataGridTextColumn Header="Broj Dok." Binding="{Binding BrojDokumenta}" Width="120"
                                                     IsReadOnly="True" />
                                 <DataGridTextColumn Header="Iznos" Binding="{Binding Iznos}"
                                                     Width="100" IsReadOnly="True" />
@@ -135,7 +133,7 @@
         <Border Grid.Column="1"
                 Margin="12,0,0,0"
                 Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                BorderBrush="BlanchedAlmond"
+                BorderBrush="{DynamicResource SystemAltMediumColor}"
                 BorderThickness="1"
                 CornerRadius="8">
 
@@ -147,28 +145,30 @@
                         ClipToBounds="True">
 
                     <Grid>
-                        <Image
-                            Stretch="Uniform"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Margin="30" />
+                        <!--                         <Image -->
+                        <!--                             Source=" -->
+                        <!-- \/\/earhiva\/eArhiva\/2026\/08/Protokol_Ulaznafaktura_2671_02-238_Verzija001_Strana001.jpg" -->
+                        <!--                             Stretch="Uniform" -->
+                        <!--                             HorizontalAlignment="Center" -->
+                        <!--                             VerticalAlignment="Center" -->
+                        <!--                             Margin="30" /> -->
 
 
                         <!-- EMPTY STATE -->
-                        <StackPanel HorizontalAlignment="Center"
-                                    VerticalAlignment="Center">
-
-                            <TextBlock Text="No file selected"
-                                       Foreground="White"
-                                       FontSize="18"
-                                       HorizontalAlignment="Center" />
-
-                            <TextBlock Text="Select an item from the archive"
-                                       Foreground="#AAAAAA"
-                                       Margin="0,6,0,0"
-                                       HorizontalAlignment="Center" />
-
-                        </StackPanel>
+                        <!-- <StackPanel HorizontalAlignment="Center" -->
+                        <!--             VerticalAlignment="Center"> -->
+                        <!-- -->
+                        <!--     <TextBlock Text="No file selected" -->
+                        <!--                Foreground="White" -->
+                        <!--                FontSize="18" -->
+                        <!--                HorizontalAlignment="Center" /> -->
+                        <!-- -->
+                        <!--     <TextBlock Text="Select an item from the archive" -->
+                        <!--                Foreground="#AAAAAA" -->
+                        <!--                Margin="0,6,0,0" -->
+                        <!--                HorizontalAlignment="Center" /> -->
+                        <!-- -->
+                        <!-- </StackPanel> -->
                     </Grid>
                 </Border>
             </Grid>
