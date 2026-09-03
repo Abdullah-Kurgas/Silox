@@ -21,6 +21,8 @@
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2"/>
+        <PackageReference Include="FirebirdSql.Data.FirebirdClient" Version="11.0.0-alpha1"/>
+        <PackageReference Include="FirebirdSql.EntityFrameworkCore.Firebird" Version="13.0.0"/>
         <PackageReference Include="FluentIcons.Avalonia" Version="2.1.335"/>
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.10"/>
     </ItemGroup>

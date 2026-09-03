@@ -8,6 +8,8 @@
 
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2"/>
+        <PackageReference Include="FirebirdSql.Data.FirebirdClient" Version="11.0.0-alpha1"/>
+        <PackageReference Include="FirebirdSql.EntityFrameworkCore.Firebird" Version="13.0.0"/>
     </ItemGroup>
 
 </Project>
