@@ -7,34 +7,45 @@
         x:Class="Silox.UI.Views.MainWindow"
         x:DataType="vm:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
+        xmlns:sidebar="clr-namespace:Silox.UI.Components.Sidebar"
         Title="Silox Management App">
 
-    <StackPanel HorizontalAlignment="Center" Spacing="50" Margin="20">
-        <StackPanel HorizontalAlignment="Center" Spacing="15">
-            <TextBlock Text="Silox Management App" FontSize="20"></TextBlock>
-            <TextBlock Text="v1.15.9.0"
-                       Foreground="#800080"
-                       FontSize="14" 
-                       FontWeight="Medium"
-                       HorizontalAlignment="Center" />
-        </StackPanel>
-        
-        <Button Click="OpenLoginDialog" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15">
-            <StackPanel Spacing="5" HorizontalAlignment="Center">
-                <Viewbox Width="60" Height="60" HorizontalAlignment="Center">
-                    <Canvas Width="24" Height="24">
-                        <Path Data="M7,14A2,2 0 0,1 5,12A2,2 0 0,1 7,10A2,2 0 0,1 9,12A2,2 0 0,1 7,14M12.65,10C11.83,7.67 9.61,6 7,6A6,6 0 0,0 1,12A6,6 0 0,0 7,18C9.61,18 11.83,16.33 12.65,14H17V18H21V14H23V10H12.65Z"
-                              Fill="#228B22" />
-                        <Path Data="M10.65,8C9.83,5.67 7.61,4 5,4A6,6 0 0,0 -1,10A6,6 0 0,0 5,16C7.61,16 9.83,14.33 10.65,12H15V16H19V12H21V8H10.65Z"
-                              Fill="#DAA520"
-                              Canvas.Left="2"
-                              Canvas.Top="-2"/>
-                    </Canvas>
-                </Viewbox>
-                
-                <TextBlock Text="Prijava za rad" FontSize="16" HorizontalAlignment="Center" />
-            </StackPanel>
-        </Button>
-    </StackPanel>
+    <!-- <StackPanel HorizontalAlignment="Center" Spacing="50" Margin="20"> -->
+    <!--     <StackPanel HorizontalAlignment="Center" Spacing="15"> -->
+    <!--         <TextBlock Text="Silox Management App" FontSize="20"></TextBlock> -->
+    <!--         <TextBlock Text="v1.15.9.0" -->
+    <!--                    Foreground="#800080" -->
+    <!--                    FontSize="14" -->
+    <!--                    FontWeight="Medium" -->
+    <!--                    HorizontalAlignment="Center" /> -->
+    <!--     </StackPanel> -->
+    <!-- -->
+    <!--     <Button Click="OpenLoginDialog" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15"> -->
+    <!--         <StackPanel Spacing="5" HorizontalAlignment="Center"> -->
+    <!--             <Viewbox Width="60" Height="60" HorizontalAlignment="Center"> -->
+    <!--                 <Canvas Width="24" Height="24"> -->
+    <!--                     <Path -->
+    <!--                         Data="M7,14A2,2 0 0,1 5,12A2,2 0 0,1 7,10A2,2 0 0,1 9,12A2,2 0 0,1 7,14M12.65,10C11.83,7.67 9.61,6 7,6A6,6 0 0,0 1,12A6,6 0 0,0 7,18C9.61,18 11.83,16.33 12.65,14H17V18H21V14H23V10H12.65Z" -->
+    <!--                         Fill="#228B22" /> -->
+    <!--                     <Path -->
+    <!--                         Data="M10.65,8C9.83,5.67 7.61,4 5,4A6,6 0 0,0 -1,10A6,6 0 0,0 5,16C7.61,16 9.83,14.33 10.65,12H15V16H19V12H21V8H10.65Z" -->
+    <!--                         Fill="#DAA520" -->
+    <!--                         Canvas.Left="2" -->
+    <!--                         Canvas.Top="-2" /> -->
+    <!--                 </Canvas> -->
+    <!--             </Viewbox> -->
+    <!-- -->
+    <!--             <TextBlock Text="Prijava za rad" FontSize="16" HorizontalAlignment="Center" /> -->
+    <!--         </StackPanel> -->
+    <!--     </Button> -->
+    <!-- </StackPanel> -->
+
+    <Grid ColumnDefinitions="250,*">
+        <sidebar:Sidebar Grid.Column="0" DataContext="{Binding Sidebar}" />
+
+        <Border Grid.Column="1" Padding="30">
+            <ContentControl Content="{Binding CurrentView}" />
+        </Border>
+    </Grid>
 
 </Window>

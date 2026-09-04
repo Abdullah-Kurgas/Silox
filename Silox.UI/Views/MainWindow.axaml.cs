@@ -1,19 +1,13 @@
 using Avalonia.Controls;
-using Avalonia.Interactivity;
-using Silox.UI.Views.Login;
+using Silox.UI.ViewModels;
 
 namespace Silox.UI.Views;
 
 public partial class MainWindow : Window
 {
-    public MainWindow()
+    public MainWindow(MainViewModel viewModel)
     {
         InitializeComponent();
-    }
-
-    private void OpenLoginDialog(object? sender, RoutedEventArgs e)
-    {
-        LoginWindow loginDialog = new LoginWindow();
-        loginDialog.ShowDialog(this);
+        DataContext = viewModel;
     }
 }

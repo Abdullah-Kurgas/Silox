@@ -37,4 +37,15 @@
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
     </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Components\Sidebar\Sidebar.axaml.cs">
+            <DependentUpon>Sidebar.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+        <AdditionalFiles Include="Components\Sidebar\Sidebar.axaml"/>
+    </ItemGroup>
 </Project>

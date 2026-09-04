@@ -3,16 +3,17 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Npgsql;
 using Silox.Data.Interfaces;
 using Silox.Service;
 using Silox.Service.DBContexts;
 using Silox.Service.Extensions;
+using Silox.Service.Services;
+using Silox.Service.Services.Authorization;
 using Silox.Service.Services.EArhivaServices;
+using Silox.UI.Components.Sidebar;
 using Silox.UI.ViewModels;
 using Silox.UI.Views;
 using Silox.UI.Views.Earhiva;
@@ -20,7 +21,7 @@ using Silox.UI.Views.Login;
 
 namespace Silox.UI;
 
-public partial class App : Application
+public class App : Application
 {
     private static IHost Host { get; set; } = null!;
 
@@ -41,11 +42,11 @@ public partial class App : Application
             var loginWindow = Host.Services.GetRequiredService<LoginWindow>();
 
             desktop.MainWindow = loginWindow;
-            desktop.ShutdownRequested += async (s, e) =>
-            {
-                await Host.StopAsync();
-                Host.Dispose();
-            };
+            // desktop.ShutdownRequested += async (s, e) =>
+            // {
+            //     await Host.StopAsync();
+            //     Host.Dispose();
+            // };
 
             loginWindow.Closed += (_, _) => { ShowMainWindow(desktop); };
         }
@@ -68,17 +69,25 @@ public partial class App : Application
     private static void ConfigureServices(IServiceCollection services)
     {
         services.AddSingleton<IConnectionStringResolver, ConnectionStringResolver>();
+        services.AddSingleton<UserSession>();
         services.AddDatabaseServices();
 
+        // Services
+        services.AddSingleton<INavigationService, NavigationService>();
+        services.AddSingleton<IPermissionService, PermissionService>();
         services.AddScoped<IEArhivaService, EArhivaService>();
+
+        // View models
         services.AddTransient<EArhivaViewModel>();
-        services.AddTransient<EArhivaView>();
-
         services.AddTransient<MainViewModel>();
-        services.AddTransient<MainWindow>();
-
         services.AddTransient<LoginViewModel>();
+        services.AddTransient<SidebarViewModel>();
+
+        // Windows
+        services.AddTransient<EArhivaView>();
+        services.AddTransient<MainWindow>();
         services.AddTransient<LoginWindow>();
+        services.AddTransient<Sidebar>();
     }
 
     private void ShowMainWindow(

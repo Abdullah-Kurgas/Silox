@@ -1,0 +1,104 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Silox.UI.ViewModels"
+             xmlns:ic="using:FluentIcons.Avalonia"
+             x:Class="Silox.UI.Components.Sidebar.Sidebar"
+             x:DataType="vm:SidebarViewModel"
+             Width="250">
+    <UserControl.Styles>
+        <Style Selector="TextBlock.nav-title">
+            <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseMediumBrush}" />
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Margin" Value="0,0,0,12" />
+        </Style>
+        <Style Selector="StackPanel.nav-item">
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Margin" Value="8 0" />
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="Spacing" Value="6" />
+        </Style>
+
+        <Style Selector="StackPanel.nav-item:pointerover TextBlock.nav-text">
+            <Setter Property="Foreground" Value="{DynamicResource SystemControlHighlightAccentBrush}" />
+            <Setter Property="TextDecorations" Value="Underline" />
+        </Style>
+    </UserControl.Styles>
+
+    <Border Padding="6" BorderThickness="0,0,1,0" BorderBrush="AliceBlue">
+        <Grid RowDefinitions="*,Auto">
+            <ScrollViewer Grid.Row="0" Padding="10">
+                <StackPanel HorizontalAlignment="Left">
+
+                    <StackPanel Margin="8 10">
+                        <TextBlock Text="Ugostiteljstvo" Classes="nav-title" />
+
+                        <StackPanel Margin="7 0" Spacing="8">
+                            <StackPanel Classes="nav-item">
+                                <ic:FluentIcon Icon="Person"
+                                               Foreground="{DynamicResource SystemControlForegroundBaseBrush}" />
+                                <TextBlock Classes="nav-text"
+                                           Text="Reprezenti"
+                                           Foreground="{DynamicResource SystemControlForegroundBaseBrush}"
+                                           FontSize="14"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+
+                            <StackPanel Classes="nav-item">
+                                <ic:FluentIcon Icon="CardUi"
+                                               Foreground="{DynamicResource SystemControlForegroundBaseBrush}" />
+                                <TextBlock Classes="nav-text"
+                                           Text="Kartice"
+                                           Foreground="{DynamicResource SystemControlForegroundBaseBrush}"
+                                           FontSize="14"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Margin="8 10">
+                        <TextBlock Text="E-Arhiva" Classes="nav-title" />
+
+                        <StackPanel Margin="7 0" Spacing="8">
+                            <StackPanel Classes="nav-item">
+                                <ic:FluentIcon Icon="Document"
+                                               Foreground="{DynamicResource SystemControlForegroundBaseBrush}" />
+                                <TextBlock Classes="nav-text"
+                                           Text="Dokumenti"
+                                           Foreground="{DynamicResource SystemControlForegroundBaseBrush}"
+                                           FontSize="14"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Margin="8 10">
+                        <TextBlock Text="Sistem" Classes="nav-title" />
+
+                        <StackPanel Margin="7 0" Spacing="8">
+                            <StackPanel Classes="nav-item">
+                                <ic:FluentIcon Icon="Settings"
+                                               Foreground="{DynamicResource SystemControlForegroundBaseBrush}" />
+                                <TextBlock Classes="nav-text"
+                                           Text="Postavke"
+                                           Foreground="{DynamicResource SystemControlForegroundBaseBrush}"
+                                           FontSize="14"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <Border Grid.Row="1" Padding="16" BorderThickness="0,1,0,0">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="{Binding User.FullName}" Foreground="#CDD6F4"
+                               FontWeight="SemiBold" FontSize="14" TextTrimming="CharacterEllipsis" />
+                    <TextBlock Text="{Binding User.Username}" Foreground="#A6ADC8"
+                               FontSize="12" TextTrimming="CharacterEllipsis" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

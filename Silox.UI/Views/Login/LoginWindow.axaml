@@ -37,7 +37,13 @@
                      ItemsSource="{Binding Users}"
                      SelectedItem="{Binding SelectedUser}"
                      SelectionChanged="UserListBox_OnSelectionChanged"
-                     BorderThickness="1" />
+                     BorderThickness="1">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullName}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
             <TextBlock Grid.Row="1" Grid.Column="0"
                        Text="Lozinka :"
