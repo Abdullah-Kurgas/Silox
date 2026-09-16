@@ -4,11 +4,17 @@
     <option name="projectPerEditor">
       <map>
         <entry key="Silox.UI/App.axaml" value="Silox.UI/Silox.UI.csproj" />
+        <entry key="Silox.UI/Components/Sidebar.axaml" value="Silox.UI/Silox.UI.csproj" />
         <entry key="Silox.UI/Views/Dashboard/Dashboard.axaml" value="Silox.UI/Silox.UI.csproj" />
+        <entry key="Silox.UI/Views/EArhiva/EArhivaView.axaml" value="Silox.UI/Silox.UI.csproj" />
         <entry key="Silox.UI/Views/Earhiva/EArhiva.axaml" value="Silox.UI/Silox.UI.csproj" />
         <entry key="Silox.UI/Views/Earhiva/EArhivaView.axaml" value="Silox.UI/Silox.UI.csproj" />
         <entry key="Silox.UI/Views/Login/LoginWindow.axaml" value="Silox.UI/Silox.UI.csproj" />
         <entry key="Silox.UI/Views/MainWindow.axaml" value="Silox.UI/Silox.UI.csproj" />
+        <entry key="Silox.UI/Views/PregledToplihObroka/PregledToplihObroka.axaml" value="Silox.UI/Silox.UI.csproj" />
+        <entry key="Silox.UI/Views/PregledToplihObroka/PregledToplihObrokaView.axaml" value="Silox.UI/Silox.UI.csproj" />
+        <entry key="Silox.UI/Views/TopliObroci.axaml" value="Silox.UI/Silox.UI.csproj" />
+        <entry key="Silox.UI/Views/TopliObrokDetails/TopliObrokDetailsView.axaml" value="Silox.UI/Silox.UI.csproj" />
       </map>
     </option>
   </component>

@@ -1,0 +1,254 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ic="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
+             xmlns:vm="clr-namespace:Silox.UI.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Silox.UI.Views.PregledToplihObroka.PregledToplihObrokaView"
+             x:DataType="vm:PregledToplihObrokaViewModel">
+    <UserControl.Styles>
+        <Style Selector="TextBlock.PageTitle">
+            <Setter Property="FontSize" Value="26" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style Selector="TextBlock.PageSubtitle">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Opacity" Value="0.60" />
+        </Style>
+
+        <Style Selector="Border.Card">
+            <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltHighBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseLowBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="10" />
+        </Style>
+
+        <Style Selector="TextBlock.TableHeader">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Opacity" Value="0.60" />
+        </Style>
+
+        <Style Selector="TextBlock.StatNumber">
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style Selector="TextBlock.StatLabel">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Opacity" Value="0.60" />
+        </Style>
+
+        <Style Selector="Button.Pagination">
+            <Setter Property="MinWidth" Value="32" />
+            <Setter Property="Height" Value="32" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="2" />
+        </Style>
+    </UserControl.Styles>
+
+    <Grid RowDefinitions="Auto,Auto,*" Margin="0" RowSpacing="10">
+        <StackPanel Grid.Row="0" Spacing="4" Margin="0 0 0 15">
+            <TextBlock Text="Potrošeni topli obroci"
+                       Classes="PageTitle" />
+            <TextBlock Text="Pregled korisnika i evidencija potrošnje"
+                       Classes="PageSubtitle" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="10">
+            <TextBox
+                Text="{Binding SearchText, Mode=TwoWay}"
+                KeyDown="SearchTextBox_KeyDown"
+                HorizontalAlignment="Left"
+                PlaceholderText="Traži..."
+                Width="300" />
+        </StackPanel>
+
+        <Grid Grid.Row="2"
+              ColumnDefinitions="1.25*,0.85*"
+              ColumnSpacing="16">
+
+            <Border Grid.Row="0">
+                <DataGrid
+                    ItemsSource="{Binding Data}"
+                    AutoGenerateColumns="False"
+                    IsReadOnly="True"
+                    SelectionMode="Single"
+                    GridLinesVisibility="Horizontal"
+                    PointerWheelChanged="ScrollEvent">
+                    <DataGrid.Styles>
+                        <Style Selector="DataGridColumnHeader">
+                            <Setter Property="Background"
+                                    Value="{DynamicResource CalendarViewBackground}" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+
+                        <Style Selector="DataGridCell">
+                            <Setter Property="FontSize" Value="13" />
+                        </Style>
+                        <Style Selector="DataGridCell:focus /template/ Rectangle">
+                            <Setter Property="IsVisible" Value="False" />
+                        </Style>
+                    </DataGrid.Styles>
+
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Reprezent" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                        Text="{Binding NazivReprezenta}"
+                                        TextTrimming="CharacterEllipsis"
+                                        VerticalAlignment="Center" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Obroci"
+                                            Binding="{Binding UkupanBrojRacuna}"
+                                            Width="120"
+                                            IsReadOnly="True" />
+
+                        <DataGridTemplateColumn Header="Ukupan iznos" Width="140">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                        Text="{Binding UkupanIznos, StringFormat='0.00 KM'}"
+                                        TextTrimming="CharacterEllipsis"
+                                        VerticalAlignment="Center" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+
+            <!-- Details -->
+            <Border Grid.Column="1"
+                    Classes="Card"
+                    Padding="22">
+
+                <!-- <ScrollViewer> -->
+                <!--     <StackPanel Spacing="18"> -->
+                <!-- -->
+                <!--         <TextBlock Text="DETALJI KORISNIKA" -->
+                <!--                    Classes="TableHeader" /> -->
+                <!-- -->
+                <!--         <StackPanel HorizontalAlignment="Center" -->
+                <!--                     Spacing="8"> -->
+                <!--             <Border Width="64" -->
+                <!--                     Height="64" -->
+                <!--                     CornerRadius="32" -->
+                <!--                     Background="{DynamicResource SystemControlHighlightAltAccentBrush}"> -->
+                <!--                 <TextBlock Text="MM" -->
+                <!--                            FontSize="18" -->
+                <!--                            FontWeight="SemiBold" -->
+                <!--                            HorizontalAlignment="Center" -->
+                <!--                            VerticalAlignment="Center" /> -->
+                <!--             </Border> -->
+                <!-- -->
+                <!--             <TextBlock Text="Marko M." -->
+                <!--                        FontSize="20" -->
+                <!--                        FontWeight="SemiBold" -->
+                <!--                        HorizontalAlignment="Center" /> -->
+                <!-- -->
+                <!--             <TextBlock Text="Proizvodnja" -->
+                <!--                        Opacity="0.60" -->
+                <!--                        HorizontalAlignment="Center" /> -->
+                <!--         </StackPanel> -->
+                <!-- -->
+                <!--         <Separator /> -->
+                <!-- -->
+                <!--         <TextBlock Text="Ovaj mjesec" -->
+                <!--                    FontSize="14" -->
+                <!--                    FontWeight="SemiBold" /> -->
+                <!-- -->
+                <!--         <Grid ColumnDefinitions="*,*" -->
+                <!--               ColumnSpacing="10"> -->
+                <!-- -->
+                <!--             <Border Classes="Card" -->
+                <!--                     Padding="14"> -->
+                <!--                 <StackPanel> -->
+                <!--                     <TextBlock Text="18" -->
+                <!--                                Classes="StatNumber" /> -->
+                <!--                     <TextBlock Text="obroka" -->
+                <!--                                Classes="StatLabel" /> -->
+                <!--                 </StackPanel> -->
+                <!--             </Border> -->
+                <!-- -->
+                <!--             <Border Grid.Column="1" -->
+                <!--                     Classes="Card" -->
+                <!--                     Padding="14"> -->
+                <!--                 <StackPanel> -->
+                <!--                     <TextBlock Text="126,00 KM" -->
+                <!--                                Classes="StatNumber" -->
+                <!--                                FontSize="18" /> -->
+                <!--                     <TextBlock Text="ukupno" -->
+                <!--                                Classes="StatLabel" /> -->
+                <!--                 </StackPanel> -->
+                <!--             </Border> -->
+                <!--         </Grid> -->
+                <!-- -->
+                <!--         <Separator /> -->
+                <!-- -->
+                <!--         <TextBlock Text="Historija obroka" -->
+                <!--                    FontSize="14" -->
+                <!--                    FontWeight="SemiBold" /> -->
+                <!-- -->
+                <!--         ~1~ History header @1@ -->
+                <!--         <Border Classes="Card" -->
+                <!--                 Padding="12"> -->
+                <!--             <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" -->
+                <!--                   ColumnDefinitions="1*,1*,1.5*,0.8*" -->
+                <!--                   RowSpacing="10"> -->
+                <!-- -->
+                <!--                 <TextBlock Text="DATUM" Classes="TableHeader" /> -->
+                <!--                 <TextBlock Grid.Column="1" Text="VRIJEME" Classes="TableHeader" /> -->
+                <!--                 <TextBlock Grid.Column="2" Text="OBJEKAT" Classes="TableHeader" /> -->
+                <!--                 <TextBlock Grid.Column="3" Text="CIJENA" Classes="TableHeader" /> -->
+                <!-- -->
+                <!--                 <TextBlock Grid.Row="1" Text="04.09.26" /> -->
+                <!--                 <TextBlock Grid.Row="1" Grid.Column="1" Text="12:14" /> -->
+                <!--                 <TextBlock Grid.Row="1" Grid.Column="2" Text="Kantina" /> -->
+                <!--                 <TextBlock Grid.Row="1" Grid.Column="3" Text="7 KM" /> -->
+                <!-- -->
+                <!--                 <TextBlock Grid.Row="2" Text="03.09.26" /> -->
+                <!--                 <TextBlock Grid.Row="2" Grid.Column="1" Text="12:08" /> -->
+                <!--                 <TextBlock Grid.Row="2" Grid.Column="2" Text="Kantina" /> -->
+                <!--                 <TextBlock Grid.Row="2" Grid.Column="3" Text="7 KM" /> -->
+                <!-- -->
+                <!--                 <TextBlock Grid.Row="3" Text="02.09.26" /> -->
+                <!--                 <TextBlock Grid.Row="3" Grid.Column="1" Text="12:22" /> -->
+                <!--                 <TextBlock Grid.Row="3" Grid.Column="2" Text="Restoran" /> -->
+                <!--                 <TextBlock Grid.Row="3" Grid.Column="3" Text="7 KM" /> -->
+                <!-- -->
+                <!--                 <TextBlock Grid.Row="4" Text="01.09.26" /> -->
+                <!--                 <TextBlock Grid.Row="4" Grid.Column="1" Text="12:11" /> -->
+                <!--                 <TextBlock Grid.Row="4" Grid.Column="2" Text="Kantina" /> -->
+                <!--                 <TextBlock Grid.Row="4" Grid.Column="3" Text="7 KM" /> -->
+                <!-- -->
+                <!--                 <TextBlock Grid.Row="5" Text="31.08.26" /> -->
+                <!--                 <TextBlock Grid.Row="5" Grid.Column="1" Text="12:17" /> -->
+                <!--                 <TextBlock Grid.Row="5" Grid.Column="2" Text="Restoran" /> -->
+                <!--                 <TextBlock Grid.Row="5" Grid.Column="3" Text="7 KM" /> -->
+                <!--             </Grid> -->
+                <!--         </Border> -->
+                <!-- -->
+                <!--         <Grid ColumnDefinitions="*,Auto"> -->
+                <!--             <TextBlock Text="Ukupno:" -->
+                <!--                        FontWeight="SemiBold" -->
+                <!--                        HorizontalAlignment="Right" /> -->
+                <!--             <TextBlock Grid.Column="1" -->
+                <!--                        Text="126,00 KM" -->
+                <!--                        Margin="10,0,0,0" -->
+                <!--                        FontWeight="SemiBold" /> -->
+                <!--         </Grid> -->
+                <!-- -->
+                <!--     </StackPanel> -->
+                <!-- </ScrollViewer> -->
+            </Border>
+        </Grid>
+
+    </Grid>
+
+</UserControl>

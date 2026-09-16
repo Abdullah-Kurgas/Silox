@@ -8,9 +8,9 @@ namespace Silox.Service.Services.EArhivaServices;
 
 public class EArhivaService(EArhivaDbContext context) : BaseService<EArhivaDbContext>(context), IEArhivaService
 {
-    public async Task<List<EArhivaDTO>> GetPagedAsync(int pageIndex, int pageSize)
+    public Task<List<EArhivaDTO>> GetPagedAsync(int pageIndex, int pageSize)
     {
-        return await _context.earhiva
+        return _context.earhiva
             .AsNoTracking()
             .OrderByDescending(e => e.Vrijeme)
             .Skip((pageIndex - 1) * pageSize)

@@ -10,8 +10,8 @@ public class GarsonDbContext(DbContextOptions<GarsonDbContext> options) : DbCont
     {
     }
 
-    public DbSet<Reprezent>? C_REPREZENTI { get; set; }
-    public DbSet<ReprezentR>? R_REPREZENTI { get; set; }
-    public DbSet<ReprezentiKarticeR>? R_REPREZENTI_KARTICE { get; set; }
-    public DbSet<Objekat>? C_OBJEKTI { get; set; }
+    public DbSet<Reprezent> C_REPREZENTI { get; set; }
+    public DbSet<ReprezentR> R_REPREZENTI { get; set; }
+    public DbSet<ReprezentiKarticeR> R_REPREZENTI_KARTICE { get; set; }
+    public DbSet<Objekat> C_OBJEKTI { get; set; }
 }

@@ -14,10 +14,12 @@ using Silox.Service.Services;
 using Silox.Service.Services.Authorization;
 using Silox.Service.Services.EArhivaServices;
 using Silox.UI.Components.Sidebar;
+using Silox.UI.Services;
 using Silox.UI.ViewModels;
 using Silox.UI.Views;
-using Silox.UI.Views.Earhiva;
+using Silox.UI.Views.EArhiva;
 using Silox.UI.Views.Login;
+using Silox.UI.Views.PregledToplihObroka;
 
 namespace Silox.UI;
 
@@ -34,6 +36,12 @@ public class App : Application
     {
         Host = ConfigureHost();
         Host.Start();
+
+        var serviceProvider = Host.Services;
+
+        DataTemplates.Add(
+            new ViewLocator(serviceProvider)
+        );
 
         // CheckDatabases();
 
@@ -76,15 +84,18 @@ public class App : Application
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddSingleton<IPermissionService, PermissionService>();
         services.AddScoped<IEArhivaService, EArhivaService>();
+        services.AddScoped<IGarsonService, GarsonService>();
 
         // View models
         services.AddTransient<EArhivaViewModel>();
+        services.AddTransient<PregledToplihObrokaViewModel>();
         services.AddTransient<MainViewModel>();
         services.AddTransient<LoginViewModel>();
         services.AddTransient<SidebarViewModel>();
 
         // Windows
         services.AddTransient<EArhivaView>();
+        services.AddTransient<PregledToplihObrokaView>();
         services.AddTransient<MainWindow>();
         services.AddTransient<LoginWindow>();
         services.AddTransient<Sidebar>();
