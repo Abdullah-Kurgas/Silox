@@ -4,14 +4,13 @@ public enum NavigationTarget
 {
     Garson,
     Poslovnice,
-    Radnici,
+    Reprezenti,
+    TopliObroci,
 
     EArhivaDokumenti,
 
     NadzorPregled,
     NadzorAktivnosti,
 
-    SystemUsers,
-    SystemRoles,
-    SystemSettings
+    Postavke
 }

@@ -43,7 +43,7 @@
     <Grid ColumnDefinitions="250,*">
         <sidebar:Sidebar Grid.Column="0" DataContext="{Binding Sidebar}" />
 
-        <Border Grid.Column="1" Padding="30">
+        <Border Grid.Column="1" Padding="20">
             <ContentControl Content="{Binding CurrentView}" />
         </Border>
     </Grid>

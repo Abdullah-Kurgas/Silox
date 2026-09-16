@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:Silox.UI.ViewModels"
              xmlns:ic="using:FluentIcons.Avalonia"
+             xmlns:enums="clr-namespace:Silox.Data.Enums;assembly=Silox.Data"
              x:Class="Silox.UI.Components.Sidebar.Sidebar"
              x:DataType="vm:SidebarViewModel"
              Width="250">
@@ -12,16 +13,21 @@
             <Setter Property="FontWeight" Value="Medium" />
             <Setter Property="Margin" Value="0,0,0,12" />
         </Style>
-        <Style Selector="StackPanel.nav-item">
+
+        <Style Selector="Button.nav-button">
             <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="Margin" Value="8 0" />
+            <Setter Property="Padding" Value="10 5" />
+            <Setter Property="Background" Value="Transparent"></Setter>
+        </Style>
+
+        <Style Selector="StackPanel.nav-item">
             <Setter Property="Orientation" Value="Horizontal" />
             <Setter Property="Spacing" Value="6" />
         </Style>
 
-        <Style Selector="StackPanel.nav-item:pointerover TextBlock.nav-text">
-            <Setter Property="Foreground" Value="{DynamicResource SystemControlHighlightAccentBrush}" />
-            <Setter Property="TextDecorations" Value="Underline" />
+        <Style Selector="TextBlock.nav-text">
+            <Setter Property="FontSize" Value="13.5" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </UserControl.Styles>
 
@@ -33,58 +39,68 @@
                     <StackPanel Margin="8 10">
                         <TextBlock Text="Ugostiteljstvo" Classes="nav-title" />
 
-                        <StackPanel Margin="7 0" Spacing="8">
-                            <StackPanel Classes="nav-item">
-                                <ic:FluentIcon Icon="Person"
+                        <StackPanel Margin="7 0" Spacing="5">
+                            <Button Classes="nav-button" Command="{Binding NavigateCommand}"
+                                    CommandParameter="{x:Static enums:NavigationTarget.Reprezenti}">
+                                <StackPanel Classes="nav-item">
+                                    <ic:FluentIcon Icon="Person"
+                                                   Foreground="{DynamicResource SystemControlForegroundBaseBrush}" />
+                                    <TextBlock Classes="nav-text" Text="Reprezenti"
                                                Foreground="{DynamicResource SystemControlForegroundBaseBrush}" />
-                                <TextBlock Classes="nav-text"
-                                           Text="Reprezenti"
-                                           Foreground="{DynamicResource SystemControlForegroundBaseBrush}"
-                                           FontSize="14"
-                                           VerticalAlignment="Center" />
-                            </StackPanel>
+                                </StackPanel>
+                            </Button>
 
-                            <StackPanel Classes="nav-item">
-                                <ic:FluentIcon Icon="CardUi"
+                            <Button Classes="nav-button" Command="{Binding NavigateCommand}"
+                                    CommandParameter="{x:Static enums:NavigationTarget.Poslovnice}">
+                                <StackPanel Classes="nav-item">
+                                    <ic:FluentIcon Icon="Building"
+                                                   Foreground="{DynamicResource SystemControlForegroundBaseBrush}" />
+                                    <TextBlock Classes="nav-text" Text="Poslovnice"
                                                Foreground="{DynamicResource SystemControlForegroundBaseBrush}" />
-                                <TextBlock Classes="nav-text"
-                                           Text="Kartice"
-                                           Foreground="{DynamicResource SystemControlForegroundBaseBrush}"
-                                           FontSize="14"
-                                           VerticalAlignment="Center" />
-                            </StackPanel>
+                                </StackPanel>
+                            </Button>
+
+                            <Button Classes="nav-button" Command="{Binding NavigateCommand}"
+                                    CommandParameter="{x:Static enums:NavigationTarget.TopliObroci}">
+                                <StackPanel Classes="nav-item">
+                                    <ic:FluentIcon Icon="Wallet"
+                                                   Foreground="{DynamicResource SystemControlForegroundBaseBrush}" />
+                                    <TextBlock Classes="nav-text" Text="Topli obroci"
+                                               Foreground="{DynamicResource SystemControlForegroundBaseBrush}" />
+                                </StackPanel>
+                            </Button>
                         </StackPanel>
                     </StackPanel>
 
                     <StackPanel Margin="8 10">
                         <TextBlock Text="E-Arhiva" Classes="nav-title" />
 
-                        <StackPanel Margin="7 0" Spacing="8">
-                            <StackPanel Classes="nav-item">
-                                <ic:FluentIcon Icon="Document"
+                        <StackPanel Margin="7 0" Spacing="5">
+                            <Button Classes="nav-button" Command="{Binding NavigateCommand}"
+                                    CommandParameter="{x:Static enums:NavigationTarget.EArhivaDokumenti}">
+                                <StackPanel Classes="nav-item">
+                                    <ic:FluentIcon Icon="Document"
+                                                   Foreground="{DynamicResource SystemControlForegroundBaseBrush}" />
+                                    <TextBlock Classes="nav-text" Text="Dokumenti"
                                                Foreground="{DynamicResource SystemControlForegroundBaseBrush}" />
-                                <TextBlock Classes="nav-text"
-                                           Text="Dokumenti"
-                                           Foreground="{DynamicResource SystemControlForegroundBaseBrush}"
-                                           FontSize="14"
-                                           VerticalAlignment="Center" />
-                            </StackPanel>
+                                </StackPanel>
+                            </Button>
                         </StackPanel>
                     </StackPanel>
 
                     <StackPanel Margin="8 10">
                         <TextBlock Text="Sistem" Classes="nav-title" />
 
-                        <StackPanel Margin="7 0" Spacing="8">
-                            <StackPanel Classes="nav-item">
-                                <ic:FluentIcon Icon="Settings"
+                        <StackPanel Margin="7 0" Spacing="5">
+                            <Button Classes="nav-button" Command="{Binding NavigateCommand}"
+                                    CommandParameter="{x:Static enums:NavigationTarget.Postavke}">
+                                <StackPanel Classes="nav-item">
+                                    <ic:FluentIcon Icon="Settings"
+                                                   Foreground="{DynamicResource SystemControlForegroundBaseBrush}" />
+                                    <TextBlock Classes="nav-text" Text="Postavke"
                                                Foreground="{DynamicResource SystemControlForegroundBaseBrush}" />
-                                <TextBlock Classes="nav-text"
-                                           Text="Postavke"
-                                           Foreground="{DynamicResource SystemControlForegroundBaseBrush}"
-                                           FontSize="14"
-                                           VerticalAlignment="Center" />
-                            </StackPanel>
+                                </StackPanel>
+                            </Button>
                         </StackPanel>
                     </StackPanel>
 

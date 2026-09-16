@@ -13,12 +13,12 @@ using Silox.Data.Models;
 
 namespace Silox.UI.ViewModels;
 
-public partial class EArhivaViewModel(IEArhivaService service) : ObservableObject
+public partial class EArhivaViewModel(IEArhivaService service) : ViewModelBase
 {
     [ObservableProperty] private ObservableCollection<EArhivaDTO> _data = new();
     [ObservableProperty] private EArhivaDTO? _selectedItem;
     [ObservableProperty] private EArhiva? _selectedItemDetails;
-    [ObservableProperty] private Bitmap? selectedImage;
+    [ObservableProperty] private Bitmap? _selectedImage;
     [ObservableProperty] private bool _isDataLoading = false;
     [ObservableProperty] private bool _isDataLoadingDetails = false;
     [ObservableProperty] private int _currentPage = 1;

@@ -4,7 +4,7 @@ using Silox.Data.Interfaces;
 
 namespace Silox.UI.ViewModels;
 
-public partial class MainViewModel : ObservableObject
+public partial class MainViewModel : ViewModelBase
 {
     private readonly INavigationService _navigationService;
 
@@ -21,7 +21,6 @@ public partial class MainViewModel : ObservableObject
         Sidebar = sidebar;
 
         _navigationService.CurrentViewChanged += OnCurrentViewChanged;
-        CurrentView = _navigationService.CurrentView;
     }
 
     private void OnCurrentViewChanged(object? sender, EventArgs e)

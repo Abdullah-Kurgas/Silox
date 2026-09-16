@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ic="using:FluentIcons.Avalonia"
     xmlns:vm="clr-namespace:Silox.UI.ViewModels"
-    x:Class="Silox.UI.Views.Earhiva.EArhivaView"
+    x:Class="Silox.UI.Views.EArhiva.EArhivaView"
     x:DataType="vm:EArhivaViewModel">
     <Grid
         Margin="10"

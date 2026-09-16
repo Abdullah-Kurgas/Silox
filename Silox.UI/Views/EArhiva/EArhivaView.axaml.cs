@@ -1,17 +1,14 @@
 using Avalonia.Controls;
 using Silox.UI.ViewModels;
 
-namespace Silox.UI.Views.Earhiva;
+namespace Silox.UI.Views.EArhiva;
 
-public partial class EArhivaView : Window
+public partial class EArhivaView : UserControl
 {
-    public EArhivaView()
+    public EArhivaView(EArhivaViewModel viewModel)
     {
         InitializeComponent();
-    }
 
-    public EArhivaView(EArhivaViewModel viewModel) : this()
-    {
         DataContext = viewModel;
         Loaded += (sender, args) => { _ = viewModel.LoadDataAsync(); };
     }

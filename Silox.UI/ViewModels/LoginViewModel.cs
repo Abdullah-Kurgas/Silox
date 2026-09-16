@@ -8,7 +8,7 @@ using Silox.Service.Services.Authorization;
 
 namespace Silox.UI.ViewModels;
 
-public partial class LoginViewModel(UserSession session) : ObservableObject
+public partial class LoginViewModel(UserSession session) : ViewModelBase
 {
     public ObservableCollection<User> Users { get; } =
     [

@@ -8,15 +8,14 @@ public class ReprezentR
     [Key]
     [Column("ID_REPREZENTA")]
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
-    public long IdReprezenta { get; set; }
+    public long IdReprezenta { get; init; }
 
-    [Column("IMA_PRIVILEGIJE")] public int ImaPrivilegije { get; set; }
+    [Column("IMA_PRIVILEGIJE")] public int ImaPrivilegije { get; init; }
 
-    [Column("ID_CENOVNIKA")] public long? IdCenovnika { get; set; }
+    [Column("ID_CENOVNIKA")] public long? IdCenovnika { get; init; }
 
     [Column("POPUST", TypeName = "decimal(18,4)")]
-    public decimal? Popust { get; set; }
+    public decimal? Popust { get; init; }
 
-    [ForeignKey(nameof(IdReprezenta))] public virtual Reprezent Reprezent { get; set; } = null!;
-    // [ForeignKey(nameof(IdCenovnika))] public virtual Cenovnik? Cenovnik { get; set; }
+    [ForeignKey(nameof(IdReprezenta))] public virtual Reprezent Reprezent { get; init; } = null!;
 }
